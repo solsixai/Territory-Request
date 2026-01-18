@@ -3,137 +3,166 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Territory Request</title>
+    <title>Request Territory</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg: #ffffff;
-            --input-bg: #f2f2f7;
-            --primary: #000000;
-            --text-main: #1c1c1e;
-            --text-secondary: #636366;
+            --primary: #1c1c1e;
+            --secondary: #8e8e93;
+            --field: #f2f2f7;
+            --radius: 14px;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
-            font-family: 'Inter', -apple-system, sans-serif;
+            font-family: 'Inter', sans-serif;
             background-color: var(--bg);
-            color: var(--text-main);
+            color: var(--primary);
             display: flex;
             justify-content: center;
-            padding-top: 40px;
+            padding: 40px 20px;
         }
 
-        .app-shell {
+        .container {
             width: 100%;
-            max-width: 375px; /* Mobile width */
-            padding: 24px;
+            max-width: 360px;
         }
 
-        header { margin-bottom: 32px; }
-        h1 { font-size: 1.8rem; font-weight: 600; letter-spacing: -0.5px; }
-        p.status { color: var(--text-secondary); font-size: 0.95rem; }
+        /* Instructions */
+        .instruction-box {
+            margin-bottom: 32px;
+            text-align: center;
+        }
 
-        .section-label {
-            font-size: 0.7rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            color: var(--text-secondary);
+        .phone-display {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--secondary);
             margin-bottom: 8px;
             display: block;
-            letter-spacing: 0.5px;
         }
 
-        .input-box {
+        h1 { font-size: 1.5rem; margin-bottom: 12px; letter-spacing: -0.5px; }
+        
+        p.guide { 
+            font-size: 0.95rem; 
+            line-height: 1.5; 
+            color: var(--secondary); 
+        }
+
+        /* Form Elements */
+        label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+            display: block;
+            color: var(--secondary);
+        }
+
+        .input-field {
             width: 100%;
-            background: var(--input-bg);
+            background: var(--field);
             border: none;
-            border-radius: 12px;
-            padding: 14px;
+            padding: 16px;
+            border-radius: var(--radius);
             font-size: 1rem;
-            margin-bottom: 20px;
+            margin-bottom: 24px;
             font-family: inherit;
         }
 
-        .input-box:focus {
-            outline: 2px solid #007aff;
-            background: #fff;
+        .preview-label {
+            margin-top: 10px;
+            font-style: italic;
         }
 
-        .btn-action {
+        .message-preview {
+            background: #f9f9f9;
+            border: 1px solid #eee;
+            padding: 14px;
+            border-radius: var(--radius);
+            font-size: 0.9rem;
+            color: #444;
+            margin-bottom: 24px;
+            line-height: 1.4;
+        }
+
+        /* Buttons */
+        .btn {
             width: 100%;
-            background: var(--primary);
-            color: white;
-            border: none;
-            border-radius: 14px;
             padding: 18px;
+            border-radius: var(--radius);
+            border: none;
             font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
             transition: opacity 0.2s;
-            margin-top: 10px;
         }
 
-        .btn-action:active { opacity: 0.7; }
-
-        .hint {
-            font-size: 0.8rem;
-            color: var(--text-secondary);
-            text-align: center;
-            margin-top: 24px;
-            line-height: 1.4;
+        .btn-wa {
+            background: var(--primary);
+            color: white;
+            margin-bottom: 12px;
         }
+
+        .btn-email {
+            background: transparent;
+            color: var(--secondary);
+            text-decoration: underline;
+            font-size: 0.85rem;
+        }
+
+        .btn:active { opacity: 0.7; }
+
     </style>
 </head>
 <body>
 
-    <div class="app-shell">
-        <header>
-            <h1>Territory</h1>
-            <p class="status">Request a new area to preach</p>
+    <div class="container">
+        <header class="instruction-box">
+            <span class="phone-display">Overseer: +27 66 232 9261</span>
+            <h1>Need Territory?</h1>
+            <p class="guide">
+                Message the territory overseer if you need more territory. Simply fill out your name below.
+            </p>
         </header>
 
-        <form id="requestForm" onsubmit="sendRequest(event)">
-            <label class="section-label">Publisher</label>
-            <input type="text" id="name" class="input-box" placeholder="Your Name" required>
+        <label>Publisher Name</label>
+        <input type="text" id="pubName" class="input-field" placeholder="Enter your name">
 
-            <label class="section-label">Current Status</label>
-            <select id="status" class="input-box">
-                <option value="Finished my territory">🏁 Finished current territory</option>
-                <option value="Need a second territory">➕ Need an additional area</option>
-                <option value="Just starting out">📖 Starting fresh</option>
-            </select>
+        <label class="preview-label">Your message will say:</label>
+        <div class="message-preview">
+            "Good day Brother, I ran out of territory. Can I get more territory? I thank you."
+        </div>
 
-            <label class="section-label">Area Preference</label>
-            <input type="text" id="preference" class="input-box" placeholder="e.g. Next available / Any area">
-
-            <button type="submit" class="btn-action">Request via WhatsApp</button>
-        </form>
-
-        <p class="hint">
-            This will open WhatsApp and draft the message for the Territory Servant.
-        </p>
+        <button class="btn btn-wa" onclick="send('wa')">Message on WhatsApp</button>
+        <button class="btn btn-email" onclick="send('email')">Send via Email instead</button>
     </div>
 
     <script>
-        const BROTHER_PHONE = "27662329261";
+        const PHONE = "27662329261";
+        const BASE_MSG = "Good day Brother, I ran out of territory. Can I get more territory? I thank you.";
 
-        function sendRequest(e) {
-            e.preventDefault();
-            const name = document.getElementById('name').value;
-            const status = document.getElementById('status').value;
-            const pref = document.getElementById('preference').value || "No preference";
+        function send(type) {
+            const name = document.getElementById('pubName').value;
+            if (!name) {
+                alert("Please enter your name first.");
+                return;
+            }
 
-            let message = `*TERRITORY REQUEST*%0A`;
-            message += `--------------------%0A`;
-            message += `*From:* ${name}%0A`;
-            message += `*Status:* ${status}%0A`;
-            message += `*Preference:* ${pref}%0A%0A`;
-            message += `Please let me know which area I can work next. Thanks!`;
+            const fullMsg = `*Name:* ${name}%0A%0A${BASE_MSG}`;
+            const emailSubject = `Territory Request - ${name}`;
+            const emailBody = `Name: ${name}\n\n${BASE_MSG}`;
 
-            window.open(`https://wa.me/${BROTHER_PHONE}?text=${message}`, '_blank');
+            if (type === 'wa') {
+                window.open(`https://wa.me/${PHONE}?text=${fullMsg}`, '_blank');
+            } else {
+                window.location.href = `mailto:?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+            }
         }
     </script>
 </body>
